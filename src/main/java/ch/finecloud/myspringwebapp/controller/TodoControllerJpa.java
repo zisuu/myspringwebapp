@@ -45,13 +45,13 @@ public class TodoControllerJpa {
                 false
         );
         modelMap.put("todo", todo);
-        return "repository";
+        return "todo";
     }
 
     @PostMapping("add-todo")
     public String saveNewTodo(ModelMap modelMap, @Valid Todo todo, BindingResult result) {
         if (result.hasErrors()) {
-            return "repository";
+            return "todo";
         }
         String username = getLoggedinUsername(modelMap);
         todo.setUsername(username);
@@ -69,13 +69,13 @@ public class TodoControllerJpa {
     public String getUpdateTodoPage(@RequestParam int id, ModelMap modelMap) {
         Todo todo = todoRepository.findById(id).get();
         modelMap.addAttribute("todo", todo);
-        return "repository";
+        return "todo";
     }
 
     @PostMapping("update-todo")
     public String updateTodo(ModelMap modelMap, @Valid Todo todo, BindingResult result) {
         if (result.hasErrors()) {
-            return "repository";
+            return "todo";
         }
         String username = getLoggedinUsername(modelMap);
         todo.setUsername(username);
